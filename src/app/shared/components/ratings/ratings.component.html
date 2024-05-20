@@ -1,0 +1,15 @@
+<span class="starColor">
+    @for (star of stars; track $index) {
+        @switch (star) {
+            @case (0) {
+                <fa-icon [icon]="faStar"></fa-icon>
+            }
+            @case (1) {
+                <fa-icon [icon]="faStarHalfStroke"></fa-icon>
+            }
+            @default {
+                <fa-icon [icon]="faStarEmpty"></fa-icon>
+            }
+        }
+    }
+</span>
