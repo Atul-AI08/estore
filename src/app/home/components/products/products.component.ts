@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { RatingsComponent } from '../../../shared/components/ratings/ratings.component';
-import { JsonPipe, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ProductStoreItem } from '../../services/product/products.storeItem';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CurrencyPipe, RatingsComponent, JsonPipe, AsyncPipe],
+  imports: [CurrencyPipe, RatingsComponent, AsyncPipe, RouterLink],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })

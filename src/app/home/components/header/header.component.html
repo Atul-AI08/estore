@@ -4,13 +4,19 @@
             <h1>estore</h1>
         </div>
         <div class="p-0 my-4 w-50 h-25 bg-white">
-            <select #categoryOptions class="dropdown p-0 m-0">
-                @for (category of categoryStore.topLevelCategories$ | async; track $index) {
-                    <option value="{{category.id}}">{{category.category}}</option>
-                }
-            </select>
-            <input #keyword type="text" class="form-control search-box" placeholder="Search..."/>
-            <button (click)="onClickSearch(keyword.value, categoryOptions.value)" class="search-button"><fa-icon [icon]="faSearch"></fa-icon></button>
+            @if (displaySearch) {
+                <ng-container>
+                    <select #categoryOptions class="dropdown p-0 m-0">
+                        @for (category of categoryStore.topLevelCategories$ | async; track $index) {
+                            <option value="{{category.id}}">{{category.category}}</option>
+                        }
+                    </select>
+                    <input #keyword type="text" class="form-control search-box" placeholder="Search..."/>
+                    <button (click)="onClickSearch(keyword.value, categoryOptions.value)" class="search-button">
+                        <fa-icon [icon]="faSearch"></fa-icon>
+                    </button>
+                </ng-container>
+            }
         </div>
         <div class="login-container p-0">
             <fa-icon class="user-icon" [icon]="faUserCircle"></fa-icon>

@@ -1,0 +1,24 @@
+<div class="row my-5 product-details-container">
+    @defer (when productLoaded;) {
+        <div class="col-5 product-image-container">
+            <img [src]="'../../../../assets/images/'+product.product_img">
+        </div>
+        <div class="col-7 product-information-container">
+            <span id="product-name">{{product.product_name}}</span>
+            <app-ratings [score]="product.ratings"></app-ratings>
+            <hr/>
+            <div class="product-price">
+                Price: <span class="price">{{product.price | currency: 'USD'}}</span>
+                <div>Inclusive of all taxes.</div>
+            </div>
+            <div class="my-3 product-description">
+                {{product.product_description}}
+            </div>
+        </div>
+    }
+    @placeholder(minimum 1s) {
+        <div class="d-flex align-items-center justify-content-center nf-container">
+            <h4>Product is Loading...</h4>
+        </div>
+    }
+</div>
