@@ -6,11 +6,13 @@ import { AsyncPipe } from '@angular/common';
 import { SearchKeyword } from '../../types/searchKeyword.type';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { CartStoreItem } from '../../services/cart/cart.storeItem';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FaIconComponent, AsyncPipe],
+  imports: [FaIconComponent, AsyncPipe, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -24,7 +26,11 @@ export class HeaderComponent {
   @Output()
   searchClicked: EventEmitter<SearchKeyword> = new EventEmitter<SearchKeyword>;
 
-  constructor(public categoryStore: CategoriesStoreItem, private router: Router){
+  constructor(
+    public categoryStore: CategoriesStoreItem,
+    private router: Router,
+    public cartStore: CartStoreItem
+  ){
     router.events
     .pipe(filter((event) => event instanceof NavigationEnd))
     .subscribe((event) => {

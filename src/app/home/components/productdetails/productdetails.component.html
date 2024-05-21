@@ -14,9 +14,17 @@
             <div class="my-3 product-description">
                 {{product.product_description}}
             </div>
+            <div class="my-5 btn btn-warning cart-button" (click)="addToCart()">
+                <div class="cart-icon-container">
+                    <fa-icon [icon]="faShoppingCart"></fa-icon>
+                </div>
+                <div class="cart-text-container">
+                    <p>Add to Cart</p>
+                </div>
+            </div>
         </div>
     }
-    @placeholder(minimum 1s) {
+    @placeholder(minimum 400ms) {
         <div class="d-flex align-items-center justify-content-center nf-container">
             <h4>Product is Loading...</h4>
         </div>

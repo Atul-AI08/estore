@@ -1,0 +1,72 @@
+@if (!cartStore.cart.products.length) {
+    <ng-container>
+        <div class="p-4 ec-main-div">
+            <span class="my-5 ec-text">
+                The Cart is Empty
+                <hr>
+                <div class="btn btn-primary my-3" (click)="navigateToHome()">
+                    <span style="font-weight: 500;">Continue Shopping</span>
+                </div>
+            </span>
+        </div>
+    </ng-container>
+}
+@if (cartStore.cart$ | async; as cart) {
+    <ng-container>
+        <div class="row my-5 fc-main-div">
+            <div class="col-8 p-4">
+                @for (cartItem of cart.products; track $index) {
+                    <div class="row cart-item-card">
+                        <div class="col-4">
+                            <img [src]="'../../../../assets/images/'+cartItem.product.product_img" alt="">
+                        </div>
+                        <div class="col-8">
+                            <div class="p-3 cart-item-details">
+                                <span class="cart-item-name">{{cartItem.product.product_name}}</span>   
+                                <div class="cart-item-price">
+                                    <span>{{cartItem.product.price | currency}}</span>
+                                </div>
+                                <div>
+                                    <app-ratings [score]="cartItem.product.ratings"></app-ratings>
+                                </div>
+                                <hr>
+                                <div class="cart-edit-container">
+                                    <div class="btn-group mx-3">
+                                        <div class="btn btn-outline-dark" (click)="decreaseProductQuantity(cartItem)">
+                                            <span> - </span>
+                                        </div>
+                                        <div class="btn">{{cartItem.quantity}}</div>
+                                        <div class="btn btn-outline-dark" (click)="increaseProductQuantity(cartItem)">
+                                            <span> + </span>
+                                        </div>
+                                    </div>
+                                    <div class="btn btn-outline-danger mx-4" (click)="removeCartItem(cartItem)">
+                                        <span><fa-icon [icon]="faTrash">Remove Item</fa-icon></span>
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                }
+            </div>
+            @if (cart.totalProducts > 0) {
+                <div class="col-4 px-4 py-3 my-4 cart-summary">
+                    <h2 class="mb-5 mt-3">Summary</h2>
+                    <div>
+                        <span>Cart Total : {{cart.totalAmount | currency}}</span>
+                        <span>Shipping Charges : Free</span>
+                        <hr>
+                        <span class="summary-total">
+                            Total: {{cart.totalAmount | currency}}
+                        </span>
+                        <hr>
+                    </div>
+                    <div class="btn btn-outline-dark w-100 mb-4 mt-1">
+                        Checkout
+                    </div>
+                </div>
+            }
+        </div>
+    </ng-container>
+}

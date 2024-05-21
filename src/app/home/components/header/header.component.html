@@ -20,14 +20,21 @@
         </div>
         <div class="login-container p-0">
             <fa-icon class="user-icon" [icon]="faUserCircle"></fa-icon>
-            <h5><a href="#">Sign In</a></h5> / <h5><a href="#">Register</a></h5>
+            <h5><a routerLink="/home/signup">Sign In / Join</a></h5>
         </div>
-        <div class="cart-wishlist">
-            <ul class="p-0">
-                <li class="list-item">
-                    <fa-icon [icon]="faShoppingCart"></fa-icon>
-                </li>
-            </ul>
+        <div class="cart-wishlist p-0 list-item">
+            <button type="button" class="btn btn-dark position-relative" routerLink="/home/cart">
+                <fa-icon [icon]="faShoppingCart"></fa-icon>
+                @if (cartStore.cart$ | async; as cart) {
+                    <ng-container>
+                        @if (cart.totalProducts > 0) {
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+                                {{cart.totalProducts}}
+                            </span>
+                        }
+                    </ng-container>
+                }
+            </button>
         </div>
     </div>
 </div>
