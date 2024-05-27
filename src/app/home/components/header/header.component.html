@@ -5,34 +5,52 @@
         </div>
         <div class="p-0 my-4 w-50 h-25 bg-white">
             @if (displaySearch) {
-                <ng-container>
-                    <select #categoryOptions class="dropdown p-0 m-0">
-                        @for (category of categoryStore.topLevelCategories$ | async; track $index) {
-                            <option value="{{category.id}}">{{category.category}}</option>
-                        }
-                    </select>
-                    <input #keyword type="text" class="form-control search-box" placeholder="Search..."/>
-                    <button (click)="onClickSearch(keyword.value, categoryOptions.value)" class="search-button">
-                        <fa-icon [icon]="faSearch"></fa-icon>
-                    </button>
-                </ng-container>
+            <ng-container>
+                <select #categoryOptions class="dropdown p-0 m-0">
+                    @for (category of categoryStore.topLevelCategories$ | async; track $index) {
+                    <option value="{{category.id}}">{{category.category}}</option>
+                    }
+                </select>
+                <input #keyword type="text" class="form-control search-box" placeholder="Search..." />
+                <button (click)="onClickSearch(keyword.value, categoryOptions.value)" class="search-button">
+                    <fa-icon [icon]="faSearch"></fa-icon>
+                </button>
+            </ng-container>
             }
         </div>
+        @if (!isUserAuthenticated) {
         <div class="login-container p-0">
             <fa-icon class="user-icon" [icon]="faUserCircle"></fa-icon>
-            <h5><a routerLink="/home/signup">Sign In / Join</a></h5>
+            <h5><a routerLink="/home/login">Sign In / Join</a></h5>
         </div>
+        }
+        @else {
+        <div class="user-container p-0">
+            <div class="dropdown user-dropdown">
+                <button class="btn btn-secondary dropdown-toggle user-dropdown-button" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <fa-icon class="user-icon" [icon]="faUserCircle"></fa-icon>
+                    Hi {{ userName }}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" (click)="pastOrders()">Past Order</a></li>
+                    <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        }
         <div class="cart-wishlist p-0 list-item">
             <button type="button" class="btn btn-dark position-relative" routerLink="/home/cart">
                 <fa-icon [icon]="faShoppingCart"></fa-icon>
                 @if (cartStore.cart$ | async; as cart) {
-                    <ng-container>
-                        @if (cart.totalProducts > 0) {
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
-                                {{cart.totalProducts}}
-                            </span>
-                        }
-                    </ng-container>
+                <ng-container>
+                    @if (cart.totalProducts > 0) {
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+                        {{cart.totalProducts}}
+                    </span>
+                    }
+                </ng-container>
                 }
             </button>
         </div>

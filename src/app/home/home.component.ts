@@ -7,6 +7,7 @@ import { CategoryService } from './services/category/category.service';
 import { CategoriesStoreItem } from './services/category/categories.storeItem';
 import { ProductStoreItem } from './services/product/products.storeItem';
 import { ProductsService } from './services/product/products.service';
+import { OrderService } from './services/order/order.service';
 import { SearchKeyword } from './types/searchKeyword.type';
 import { RouterOutlet, NavigationEnd, Router } from '@angular/router';
 import { CartStoreItem } from './services/cart/cart.storeItem';
@@ -18,7 +19,7 @@ import { filter } from 'rxjs';
   imports: [HeaderComponent, CatnavigationComponent, SidenavigationComponent, ProductsComponent, RouterOutlet],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  providers: [CategoryService, CategoriesStoreItem, ProductStoreItem, ProductsService, CartStoreItem]
+  providers: [CategoryService, CategoriesStoreItem, ProductStoreItem, ProductsService, CartStoreItem, OrderService]
 })
 export class HomeComponent {
   constructor(private categoriesStoreItem: CategoriesStoreItem,
