@@ -2,16 +2,11 @@ import { StoreItem } from "../../../shared/storeItem";
 import { Cart, CartItem } from "../../types/cart.type";
 import { Product } from "../../types/products.type";
 import { Observable } from "rxjs";
-import { isPlatformBrowser } from "@angular/common";
-import { PLATFORM_ID } from "@angular/core";
-import { Inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 
 @Injectable()
 export class CartStoreItem extends StoreItem<Cart>{
-    constructor(
-        @Inject(PLATFORM_ID) platFormId: Object
-    ){
-        const isBrowser: boolean = isPlatformBrowser(platFormId);
+    constructor(){
         const storedCart: any = sessionStorage.getItem('cart');
         if (storedCart){
             super(JSON.parse(storedCart));
